@@ -1,0 +1,22 @@
+2021/11/16 14:59:33 Info : MemoryStore API starting...
+2021/11/16 14:59:33 Info : API serving at :8080
+2021/11/16 14:59:38 Info : METHOD=DELETE, URI=/api/flush, BODY=
+2021/11/16 14:59:38 Info : STATUS=200, RESPONSE={"status":200,"data":{}}
+2021/11/16 14:59:40 Info : METHOD=POST, URI=/api/set, BODY={
+    "key" : "occupution",
+    "value": "ceng"
+}
+2021/11/16 14:59:40 Info : STATUS=200, RESPONSE={"status":200,"data":{"key":"occupution","value":"ceng"}}
+2021/11/16 14:59:41 Info : METHOD=POST, URI=/api/set, BODY={
+    "key" : "occupution",
+    "value": "ceng"
+}
+2021/11/16 14:59:41 Info : STATUS=200, RESPONSE={"status":200,"data":{"key":"occupution","value":"ceng"}}
+2021/11/16 14:59:43 Info : METHOD=GET, URI=/api/get?key=occupution, BODY=
+2021/11/16 14:59:43 Info : STATUS=200, RESPONSE={"status":200,"data":{"key":"occupution","value":"ceng"}}
+2021/11/16 14:59:43 Info : METHOD=GET, URI=/api/get?key=occupution, BODY=
+2021/11/16 14:59:43 Info : STATUS=200, RESPONSE={"status":200,"data":{"key":"occupution","value":"ceng"}}
+2021/11/16 14:59:45 Info : METHOD=DELETE, URI=/api/flush, BODY=
+2021/11/16 14:59:45 Info : STATUS=200, RESPONSE={"status":200,"data":{}}
+2021/11/16 14:59:45 Info : METHOD=DELETE, URI=/api/flush, BODY=
+2021/11/16 14:59:45 Info : STATUS=200, RESPONSE={"status":200,"data":{}}
