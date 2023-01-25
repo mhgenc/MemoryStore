@@ -13,29 +13,36 @@ import (
 	"os"
 	"path"
 	"sort"
+	"sync"
 	"time"
 )
 
-//MemoryStore is our db
+// MemoryStore is our db
 var memoryStore map[string]string
 
-//InitMemoryStore Initialize memory store map[string]string
+var mutex sync.RWMutex
+
+// InitMemoryStore Initialize memory store map[string]string
 func InitMemoryStore() {
 	memoryStore = make(map[string]string)
 }
 
-//FlushMemoryStore Clear memory store
+// FlushMemoryStore Clear memory store
 func FlushMemoryStore() {
 	InitMemoryStore()
 }
 
-//SetStoreData Set key/value to memory store
+// SetStoreData Set key/value to memory store
 func SetStoreData(data *models.ApiData) {
+	mutex.Lock()
+	defer mutex.Unlock()
 	memoryStore[data.Key] = data.Value
 }
 
-//GetStoreData Returns the value of the key given as a parameter
+// GetStoreData Returns the value of the key given as a parameter
 func GetStoreData(key string) (string, error) {
+	mutex.RLock()
+	defer mutex.RUnlock()
 	if val, ok := memoryStore[key]; ok {
 		return val, nil
 	} else {
@@ -43,7 +50,7 @@ func GetStoreData(key string) (string, error) {
 	}
 }
 
-//PrepareResponse Prepare the api response body and http status
+// PrepareResponse Prepare the api response body and http status
 func PrepareResponse(w http.ResponseWriter, status int, errorMessage string, data *models.ApiData) {
 	w.Header().Set("Content-Type", "application/json")
 
@@ -98,7 +105,7 @@ func ReadBackup() {
 	}
 }
 
-//ArchiveBackups Archives backup files when the flush api is called
+// ArchiveBackups Archives backup files when the flush api is called
 func ArchiveBackups() error {
 	// if dir exists do nothing, else create dir
 	err := os.MkdirAll(config.DIR_SAVED_FILES, os.ModePerm)
